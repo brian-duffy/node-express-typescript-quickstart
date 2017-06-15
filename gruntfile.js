@@ -39,13 +39,6 @@ module.exports = function (grunt) {
       }
     },
     ts: {
-      build: {
-        src: ['server/**/*.ts', '!node_modules/**/*.ts'], // Avoid compiling TypeScript files in node_modules
-        options: {
-          module: 'commonjs', // To compile TypeScript using external modules like NodeJS
-          fast: 'never' // You'll need to recompile all the files each time for NodeJS
-        }
-      },
       buildServer: {
         files: [{
           src: ['server/\*\*/\*.ts', '!src/.baseDir.ts', '!src/_all.d.ts']
@@ -54,18 +47,6 @@ module.exports = function (grunt) {
           module: 'commonjs',
           target: 'es6',
           sourceMap: false
-        }
-      }
-    },
-    exec: {
-      angular_build: {
-        cmd: function () {
-          return 'ng build --prod';
-        }
-      },
-      angular_serve: {
-        cmd: function () {
-          return 'ng serve';
         }
       }
     }
@@ -81,6 +62,5 @@ module.exports = function (grunt) {
 
   // Default tasks.
   grunt.registerTask('serve', ['concurrent:watchers']);
-  grunt.registerTask('build', ['ts:buildServer', 'tslint', 'exec:angular_build']);
   grunt.registerTask('default', ['tslint:all', 'ts:buildServer', 'watch']);
 };
