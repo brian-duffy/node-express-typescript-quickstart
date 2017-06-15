@@ -61,6 +61,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-exec');
 
   // Default tasks.
-  grunt.registerTask('serve', ['concurrent:watchers']);
-  grunt.registerTask('default', ['tslint:all', 'ts:buildServer', 'watch']);
+  grunt.registerTask('default', ['concurrent:watchers']);
+  grunt.registerTask('build', ['ts:buildServer', 'tslint', 'exec:angular_build']);  
+  grunt.registerTask('serve', ['tslint:all', 'ts:buildServer', 'watch']);
 };
